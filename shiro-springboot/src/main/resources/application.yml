@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:mysql://localhost:3306/spring_boot_project?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/spring_boot_test?useUnicode=true&serverTimezone=GMT%2B8&characterEncoding=UTF-8
+    username: root
+    password: 653713
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    druid:
+      # 配置监控防火墙功能
+      filters: stat,wall # 这两个详细参数可通过 filter-xxx 配置
+      filter:
+        stat:
+          enabled: true
+          slow-sql-millis: 1000 # 设置 1000ms 为慢查询
+          log-slow-sql: true  # 开启慢查询监控
+        wall: # 在这里可配置 不允许更新、不允许删除等操作
+          enabled: true
+
+      # 开启监控页，并配置账号密码
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin
+        # reset-enable: false # 重置按钮
+
+      # 开启web 监控功能。 urlPattern 和 exclusions 有默认值
+      web-stat-filter:
+        enabled: true
+
+      # aop-patterns: cc.acdongla.boot.* 配置监控包
+mybatis:
+  #配置Mapper映射文件
+  mapper-locations: classpath:/mappers/*.xml
+  configuration:
+    # 自动驼峰命名
+    map-underscore-to-camel-case: true
